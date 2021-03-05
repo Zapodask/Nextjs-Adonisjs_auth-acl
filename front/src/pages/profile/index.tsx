@@ -4,7 +4,7 @@ import Header from '@/components/layout'
 import protectRoute from '@/services/protectRoute'
 import Information from '@/components/profile/information'
 
-import ChangeEmail from '@/components/profile/change-email'
+import ChangeEmail from '@/components/profile/change-email/sendChangeEmail'
 import ChangePassword from '@/components/profile/change-password'
 
 import { Container } from '@/styles/pages/profile'

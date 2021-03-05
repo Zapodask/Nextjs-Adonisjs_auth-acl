@@ -21,7 +21,7 @@ class AdminSeeder {
       name: 'Admin',
       surname: '01',
       email: 'admin@base.com',
-      password: 'secret',
+      password: 'secretPass',
       role: 'admin'
     })
 
@@ -34,7 +34,7 @@ class AdminSeeder {
       name: 'Manager',
       surname: '01',
       email: 'manager@base.com',
-      password: 'secret',
+      password: 'secretPass',
       role: 'manager'
     })
 

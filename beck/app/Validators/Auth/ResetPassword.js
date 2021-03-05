@@ -4,7 +4,7 @@ class AuthResetPassword {
   get rules () {
     return {
       token: 'required',
-      password: 'required|confirmed'
+      password: 'required|confirmed|min:8'
     }
   }
 
@@ -12,7 +12,8 @@ class AuthResetPassword {
     return {
       'token.required': 'O token é obrigatório',
       'password.required': 'A senha é obrigatória.',
-      'password.confirmed': 'As senhas não são iguais.'
+      'password.confirmed': 'As senhas não são iguais.',
+      'password.min': 'A senha deve ter no mínimo 8 dígitos.'
     }
   }
 }

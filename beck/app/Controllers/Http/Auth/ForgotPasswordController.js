@@ -33,7 +33,7 @@ class ForgotPasswordController {
             })
     
             //Gerando url para resetar a senha.
-            const Url = `${Env.get('FRONT_URL')}/auth/reset-password?token=${token}`
+            const Url = `${Env.get('FRONT_URL')}/profile/reset-password?token=${token}`
     
             //Enviando email.
             await Mail.send('emails.forgotpassword', { name: user.name, token, Url }, (message) => {

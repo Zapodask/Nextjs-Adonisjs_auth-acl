@@ -1,13 +1,13 @@
 import React from 'react'
 import { Container, Form, Input } from '@/styles/components/login/registerForm'
 
-import { useRegister } from '@/hooks/authHooks'
+import { HandleRegister } from '@/services/authHandles'
 
 const RegisterForm = () => {
     return (
         <Container>
             <h1>Registrar</h1>
-            <Form onSubmit={useRegister}>
+            <Form onSubmit={HandleRegister}>
                 <Input name='name' placeholder='Nome' />
                 <Input name='surname' placeholder='Sobrenome' />
                 <Input type='email' name='email' placeholder='Email' />

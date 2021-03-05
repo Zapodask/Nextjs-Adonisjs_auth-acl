@@ -18,6 +18,8 @@ class AuthController {
             const userRole = await Role.findBy('slug', 'client')
             await user.roles().attach([userRole.id], null, trx)
 
+            user.role = 'client'
+
             await trx.commit()
 
             //Aplicando transformer.
