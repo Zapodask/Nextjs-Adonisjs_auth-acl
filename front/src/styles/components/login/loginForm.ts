@@ -27,7 +27,7 @@ export const Form = styled(Unform)`
         display: block;
         margin: 20px auto;
         padding: 14px 40px;
-        border: 2px solid #35d475;
+        border: 2px solid #70e000;
         border-radius: 24px;
         transition: 0.25s;
         outline: none;
@@ -54,6 +54,6 @@ export const Input = styled(CInput)`
 
     &:focus {
         width: 380px;
-        border-color: #35d475;
+        border-color: #70e000;
     }
 `

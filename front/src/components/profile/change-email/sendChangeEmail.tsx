@@ -6,7 +6,9 @@ import { HandleSendChangeEmail } from '@/services/authHandles'
 const SendChangeEmail = () => {
     return (
         <Container>
-            <button onClick={HandleSendChangeEmail} >Solicitar troca de email</button>
+            <main>
+                <button onClick={HandleSendChangeEmail} >Solicitar troca de email</button>
+            </main>
         </Container>
     )
 }
