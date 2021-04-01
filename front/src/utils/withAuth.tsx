@@ -1,5 +1,5 @@
 import React, { ElementType } from 'react'
-import Router from 'next/router'
+import Router from 'next/Router'
 
 import Cookie from 'js-cookie'
 
