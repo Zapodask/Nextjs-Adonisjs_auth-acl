@@ -1,5 +1,5 @@
 import api from '@/services/api'
-import { login, saveRole, saveRefreshToken, saveUser } from '@/services/auth'
+import Cookie from 'js-cookie'
 
 import Router from 'next/Router'
 import User from '@/interfaces/User'
@@ -22,20 +22,28 @@ interface TokenResponse {
 function Login (data: TokenResponse) {
     const res = data.data
 
-    login(res.token.token)
-    saveRefreshToken(res.token.refreshToken)
-    saveRole(res.user.role)
-    saveUser(res.user)
+    Cookie.set('credentials', {
+        token: res.token.token,
+        refreshToken: res.token.refreshToken,
+        role: res.user.role
+    })
+
+    Cookie.set('user', res.user)
 
     Router.back()
 }
 
-export const HandleLogin = (data: LoginData) => {
+export const HandleLogin = (data: LoginData, setOpen: (open: boolean) => void) => {
     api.post('auth/login', data)
         .then((response: TokenResponse) => {
             Login(response)
-        }).catch(() => {
-            alert('Email ou senha incorreto.')
+
+            setOpen(false)
+            Router.push('/')
+
+            return true
+        }).catch((error) => {
+            return error
         })
 }
 
@@ -51,9 +59,17 @@ export const HandleRegister = (data: RegisterData) => {
     api.post('auth/register', data)
         .then((response: TokenResponse) => {
             Login(response)
+            return response
         }).catch((error) => {
             return error
         })
+}
+
+export const handleLogout = () => {
+    Cookie.remove('credentials')
+    Cookie.remove('user')
+
+    Router.push('/')
 }
 
 export const HandleSendChangeEmail = () => {
@@ -124,4 +140,14 @@ export const HandleResetPassword = ({token, data}: ResetPasswordData) => {
         }).catch((error) => {
             return error
         })
+}
+
+export const HandleRefreshToken = () => {
+    api.post('/auth/refresh', {
+        refresh_token: Cookie.getJSON('credentials').refreshToken
+    }).then((response) => {
+        if (response !== undefined) {
+            Login(response)
+        }
+    })
 }

@@ -72,7 +72,13 @@ class AuthController {
         //Gerando novo token com o refresh-token.
         const token = await auth.newRefreshToken().generateForRefreshToken(refresh_token, true)
 
-        return response.status(200).send(token)
+        var user = await User.findBy('email', email)
+        user = await transform.item(user, Transformer)
+
+        return response.status(200).send({
+            token,
+            user
+        })
     }
 
     async changePassword ({ request, response, auth }) {

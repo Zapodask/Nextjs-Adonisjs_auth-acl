@@ -39,17 +39,17 @@ export default class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html lang="pt">
+      <Html lang='pt'>
         <Head>
-          <meta charSet="utf-8" />
+          <meta charSet='utf-8' />
 
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
-            rel="stylesheet"
+            href='https://fonts.googleapis.com/css?family=Roboto:400,500,700'
+            rel='stylesheet'
           />
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/icon?family=Material+Icons'
           />
         </Head>
         <body>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container, Form, Input } from '@/styles/components/profile/change-email/changeEmail'
 
-import { HandleChangeEmail } from '@/services/authHandles'
+import { HandleChangeEmail } from '@/utils/authHandles'
 
-const ChangeEmail = (token: string) => {
+const ChangeEmail = (token: any) => {
     function Submit (data: { email: string }) {
         HandleChangeEmail({ token: token, data: data })
     }

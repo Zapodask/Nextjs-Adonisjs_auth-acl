@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { getToken, getRefreshToken } from './auth'
+import Cookie from 'js-cookie'
 
-import refreshToken from '@/services/refreshToken'
+import { HandleRefreshToken } from '@/utils/authHandles'
 
 const api = axios.create({
   baseURL: 'http://127.0.0.1:3333'
 })
 
 api.interceptors.request.use(async config => {
-  const token = getToken()
+  const token = await Cookie.getJSON('credentials').token
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -20,10 +20,11 @@ api.interceptors.response.use(async (response: any) => {
 }, async function (error) {
   const response = error.response
   const config = response.config
+  const refreshToken = await Cookie.getJSON('credentials').refreshToken
   var res
   
-  if (response.status === 401 && getRefreshToken() !== null && config.url !== '/auth/refresh') {
-    refreshToken()
+  if (response.status === 401 && refreshToken !== null && config.url !== '/auth/refresh') {
+    HandleRefreshToken()
     
     switch (response.config.method) {
       case 'get':

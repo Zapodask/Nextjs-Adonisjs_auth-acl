@@ -1,15 +1,18 @@
 import styled from 'styled-components'
 import { Form as Unform } from '@unform/web'
-import { Input as CInput } from '@/components/input'
 
 export const Container = styled.div`
-    display: grid;
-    place-items: center;
-    color: black;
+    width: 100%;
+    max-width: 400px;
+    min-width: 350px;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 15px;
+    background: ${props => props.theme.colors.primary};
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     main {
         width: 400px;
-        padding: 40px;
         text-align: center;
 
         h1 {
@@ -27,33 +30,19 @@ export const Form = styled(Unform)`
         display: block;
         margin: 20px auto;
         padding: 14px 40px;
-        border: 2px solid #70e000;
+        border: 2px solid #38b000;
         border-radius: 24px;
         transition: 0.25s;
+        color: ${props => props.theme.colors.text};
         outline: none;
         cursor: pointer;
-    }
-`
 
-export const Input = styled(CInput)`
-    text-align: center;
-    background: none;
-    border: 0;
-    width: 300px;
-    display: block;
-    margin: 20px auto;
-    padding: 14px 10px;
-    border: 2px solid #ced4da;
-    border-radius: 24px;
-    transition: 0.25s;
-    outline: none;
+        &:hover {
+            border-color: #0077b6;
+        }
 
-    &:hover {
-        border-color: #0353a4;
-    }
-
-    &:focus {
-        width: 380px;
-        border-color: #70e000;
+        &:focus {
+            border-color: #480ca8;
+        }
     }
 `

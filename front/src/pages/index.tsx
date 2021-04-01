@@ -1,15 +1,16 @@
 import React from 'react'
-import Link from 'next/Link'
+import Layout from '@/components/layout'
 
-import Header from '@/components/layout'
+import { Form } from '@unform/web'
+import { Input } from '@/components/input'
 
 const Index: React.FC = () => {
   return (
-    <Header title='Home'>
-      <Link href='/login'>
-        <h3>Login</h3>
-      </Link>
-    </Header>
+    <Layout title='Home'>
+      <Form onSubmit={() => console.log('a')}>
+        <Input name='name' label='Name' />
+      </Form>
+    </Layout>
   )
 }
 

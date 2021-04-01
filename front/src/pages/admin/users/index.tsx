@@ -1,14 +1,14 @@
 import React from 'react'
-import Header from '@/components/layout'
+import Layout from '@/components/layout'
 
-import protectRoute from '@/services/protectRoute'
+import withAuth from '@/utils/withAuth'
 import useFetch from '@/hooks/useFetch'
 
 import User from '@/interfaces/User'
 import MaterialTable from 'material-table'
 
 import Router from 'next/Router'
-import { getRole } from '@/services/auth'
+import Cookie from 'js-cookie'
 
 interface Data {
   pagination: {
@@ -21,8 +21,6 @@ interface Data {
 }
 
 const Users: React.FC = () => {
-    protectRoute('manager')
-
     const { data, error } = useFetch<Data>('/admin/users')
 
     if (!data) return <h1>Carregando...</h1>
@@ -30,7 +28,7 @@ const Users: React.FC = () => {
     if (error) return <h1>Erro ao carregar</h1>
 
     return (
-        <Header title='Admin users'>
+        <Layout title='Admin users'>
           <MaterialTable
               title='Usuários'
               columns={[
@@ -51,15 +49,15 @@ const Users: React.FC = () => {
                     icon: 'add',
                     tooltip: 'Add User',
                     isFreeAction: true,
-                    hidden: (getRole() === 'admin' ? false : true),
+                    hidden: (Cookie.getJSON('credentials').role === 'admin' ? false : true),
                     onClick: () => {
                       Router.push('/admin/users/add')
                     }
                   }
                 ]}
           />
-        </Header>
+        </Layout>
     )
 }
 
-export default Users
+export default withAuth({Component: Users, role: 'manager'})

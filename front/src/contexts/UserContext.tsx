@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react'
 import User from '@/interfaces/User'
 
-import { getToken } from '@/services/auth'
+import Cookie from 'js-cookie'
 import api from '@/services/api'
 
 interface UserContextData {
@@ -19,11 +19,17 @@ export const UserProvider = ({children}: UserProviderProps) => {
     const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
-        if (getToken() !== null && user === null) {
-            api.get('profile')
-                .then((response: any) => {
-                    setUser(response.data)
-                })
+        async () => {
+            const token = await Cookie.getJSON('credentials').token
+
+            if (token !== null && user === null) {
+                api.get('profile')
+                    .then((response: any) => {
+                        setUser(response.data)
+                    })
+            } else if (token === null) {
+                setUser(null)
+            }
         }
     })
 

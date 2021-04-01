@@ -5,7 +5,7 @@ import { Input as CInput } from '@/components/input'
 export const Container = styled.div`
     border: 2px solid #ced4da;
     border-radius: 5px;
-    background: #f5f5f5;
+    background: ${props => props.theme.colors.primary};
 
     display: grid;
     place-items: center;

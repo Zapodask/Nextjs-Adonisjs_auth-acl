@@ -1,11 +1,11 @@
 import React from 'react'
-import Header from '@/components/layout'
+import Layout from '@/components/layout'
 
 import api from '@/services/api'
 import { Form } from '@unform/web'
 
-import Input from '@/components/input'
-import protectRoute from '@/services/protectRoute'
+import { Input } from '@/components/input'
+import withAuth from '@/utils/withAuth'
 
 interface User {
     name: string
@@ -17,8 +17,6 @@ interface User {
 }
 
 const AddUser = () => {
-    protectRoute('admin')
-
     const handleRegister = (data: User) => {
         api.post('admin/users', data)
             .then((response: any) => {
@@ -27,26 +25,26 @@ const AddUser = () => {
     }
 
     return (
-        <Header title='Add users'>
+        <Layout title='Add users'>
             <h1>Adicionar usuário</h1>
             <Form onSubmit={handleRegister}>
                 <p>Nome:</p>
-                <Input name='name' />
+                <Input name='name' label='Name' />
                 <p>Sobrenome:</p>
-                <Input name='surname' />
+                <Input name='surname' label='Surname' />
                 <p>email:</p>
-                <Input type='email' name='email' />
+                <Input type='email' name='email' label='Email' />
                 <p>Senha:</p>
-                <Input type='password' name='password' />
+                <Input type='password' name='password' label='Password' />
                 <p>Confirmar senha:</p>
-                <Input type='password' name='password_confirmation' />
+                <Input type='password' name='password_confirmation' label='Confirm password' />
                 <p>Role:</p>
-                <Input name='role' />
+                <Input name='role' label='Role' />
                 <br />
                 <button type='submit'>Registrar</button>
             </Form>
-        </Header>
+        </Layout>
     )
 }
 
-export default AddUser
+export default withAuth({Component: AddUser, role: 'admin'})

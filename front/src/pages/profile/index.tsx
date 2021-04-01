@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '@/components/layout'
+import Layout from '@/components/layout'
 
-import protectRoute from '@/services/protectRoute'
+import withAuth from '@/utils/withAuth'
 import Information from '@/components/profile/information'
 
 import ChangeEmail from '@/components/profile/change-email/sendChangeEmail'
@@ -10,10 +10,8 @@ import ChangePassword from '@/components/profile/change-password'
 import { Container } from '@/styles/pages/profile'
 
 const Profile = () => {
-    protectRoute('client')
-
     return (
-        <Header title='Profile'>
+        <Layout title='Profile'>
             <Container>
                 <main>
                     <Information />
@@ -25,8 +23,8 @@ const Profile = () => {
                     <ChangePassword />
                 </main>
             </Container>
-        </Header>
+        </Layout>
     )
 }
 
-export default Profile
+export default withAuth({Component: Profile, role: 'client'})

@@ -24,7 +24,7 @@ class ChangeEmailController {
             })
     
             //Gerando url para resetar a senha.
-            const Url = `${Env.get('FRONT_URL')}/profile/change-email?token=${token}`
+            const Url = `${Env.get('FRONT_URL')}/profile/change-email/${token}`
 
             //Enviando email.
             await Mail.send('emails.changeemail', { name: user.name, token, Url }, (message) => {
